@@ -5,24 +5,82 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
+
+    <title>Калькулятор доставки</title>
 </head>
 <body>
-<form>
-    <label for="amount">Amount of boxes:</label>
-    <input type="number" id="amount" name="amount">
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="amount">Упаковок лекарства нужно:</label>
+            <input type="number" class="form-control" id="amount" name="amount">
+        </div>
+        <div class="form-group">
+            <label for="price">Стоимость в лирах:</label>
+            <input type="number" class="form-control" id="price" name="price">
+        </div>
+        <div class="form-group">
+            <label for="exchange">Курс рубля к лире:</label>
+            <input type="number" class="form-control" id="exchange" name="exchange">
+        </div>
+        <div class="form-group">
+            <label for="exchange-us">Курс рубля к доллару:</label>
+            <input type="number" class="form-control" id="exchange-us" name="exchange-us">
+        </div>
+        <button type="button" class="btn btn-primary" onclick="calculate()">Рассчитать доставку</button>
+    </form>
     <br>
-    <label for="price">Price of one box:</label>
-    <input type="number" id="price" name="price">
-    <br>
-    <label for="exchange">Exchange rate:</label>
-    <input type="number" id="exchange" name="exchange">
-    <br><br>
-    <button type="button" onclick="calculate()">Calculate</button>
-</form>
-<br>
-<label for="total">Total cost:</label>
-<input type="number" id="total" name="total" disabled>
+    <div class="row">
+        <p>В стоимость сразу же включена моя услуга и доставка лекарств курьерской службой до Стамбула 2000 р и 350 р</p>
+    </div>
+    <div class="form-group">
+        <label for="explanation">Разбивка:</label>
+        <input class="form-control" id="explanation" name="explanation" disabled>
+    </div>
+    <div class="form-group">
+        <label for="total">Общая стоимость:</label>
+        <input type="number" class="form-control" id="total" name="total" disabled>
+    </div>
+    <div class="row">
+        <p>Доставка в другие регионы, кроме МСК осуществляется CDEK и оплачивается наложенным платежом. Оплата услуг курьера производится перед отсылкой лекарства к вам</p>
+    </div>
+
+</div>
+
 
 </body>
 </html>
+
+<script>
+    function calculate() {
+        const amount = document.getElementById("amount").value;
+        const price = document.getElementById("price").value;
+        const exchange = document.getElementById("exchange").value;
+        const exchangeUS = document.getElementById("exchange-us").value;
+        let courierPriceBracket;
+        if (amount <= 100) {
+            courierPriceBracket = 15
+        } else if(amount <= 300) {
+            courierPriceBracket = 20
+        } else (
+            courierPriceBracket = 25
+        )
+        let drugPrice = amount * price * exchange;
+        let courier = amount * exchangeUS * courierPriceBracket;
+
+        document.getElementById("total").value = (drugPrice + courier + 2350.0).toFixed(2);
+        document.getElementById("explanation").value = ("Стоимость лекарств = " + drugPrice + "\n Курьер = " + courier)
+    }
+    function getExchangeRate() {
+        return fetch("https://open.er-api.com/v6/latest/TRY", {mode:'no-cors'})
+            .then(response => response.json())
+            .catch(error => console.log("Error: " + error));
+
+    }
+
+</script>
