@@ -34,6 +34,7 @@
             <input type="number" class="form-control" id="exchange-us" name="exchange-us">
         </div>
         <button type="button" class="btn btn-primary mt-2" onclick="calculate()">Рассчитать доставку</button>
+        <button type="button" class="btn btn-danger mt-2" onclick="clear()">Сбросить</button>
     </form>
     <br>
     <div class="form-group">
@@ -84,10 +85,16 @@
         }
         const istanbulDeliveryFee = (100 * trExchangeAdjusted);
         document.getElementById("total").value = (drugPrice + courier + serviceFee + istanbulDeliveryFee).toFixed(2);
-        document.getElementById("explanation").value = ("Стоимость лекарств = " + drugPrice + " Курьер = " + courier);
-        document.getElementById("comment").value = "В стоимость сразу же включена моя услуга и доставка лекарств курьерской службой до Стамбула " + serviceFee + " р и " + istanbulDeliveryFee + " р";
+        document.getElementById("explanation").value = ("Стоимость лекарств = " + drugPrice.toFixed(2) + " Курьер = " + courier.toFixed(2));
+        document.getElementById("comment").value = "В стоимость сразу же включена моя услуга и доставка лекарств курьерской службой до Стамбула " + serviceFee.toFixed(2) + " руб. и " + istanbulDeliveryFee.toFixed(2) + " руб.";
     }
 
+    function clear() {
+        document.getElementById("total").value = "";
+        document.getElementById("explanation").value = "";
+        document.getElementById("comment").value =  "";
+
+    }
     function getExchangeRate() {
         return fetch("https://open.er-api.com/v6/latest/TRY", {mode: 'no-cors'})
             .then(response => response.json())
