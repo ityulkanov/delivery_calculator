@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -34,8 +34,11 @@
             <input type="number" class="form-control" id="exchange-us" name="exchange-us">
         </div>
         <button type="button" class="btn btn-primary mt-2" onclick="calculate()">Рассчитать доставку</button>
-        <button type="button" class="btn btn-danger mt-2" onclick="clear()">Сбросить</button>
     </form>
+    <form>
+        <button type="button" class="btn btn-danger mt-2" onclick="clr()">Сбросить</button>
+    </form>
+
     <br>
     <div class="form-group">
         <label for="explanation">Комментарий</label>
@@ -89,7 +92,8 @@
         document.getElementById("comment").value = "В стоимость сразу же включена моя услуга и доставка лекарств курьерской службой до Стамбула " + serviceFee.toFixed(2) + " руб. и " + istanbulDeliveryFee.toFixed(2) + " руб.";
     }
 
-    function clear() {
+    function clr() {
+        console.log("run clear func")
         document.getElementById("total").value = "";
         document.getElementById("explanation").value = "";
         document.getElementById("comment").value =  "";
