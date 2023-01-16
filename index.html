@@ -21,7 +21,8 @@
             <input type="number" class="form-control" id="amount" name="amount">
         </div>
         <div class="form-group">
-            <label for="price">Стоимость в лирах <a href="https://www.ilactr.com/atc/V03AF.html">Узнать можно тут</a>:</label>
+            <label for="price">Стоимость в лирах <a href="https://www.ilactr.com/atc/V03AF.html">Узнать можно
+                тут</a>:</label>
             <input type="number" class="form-control" id="price" name="price">
         </div>
         <div class="form-group">
@@ -35,8 +36,9 @@
         <button type="button" class="btn btn-primary mt-2" onclick="calculate()">Рассчитать доставку</button>
     </form>
     <br>
-    <div class="row">
-        <p>В стоимость сразу же включена моя услуга и доставка лекарств курьерской службой до Стамбула 2000 р и 350 р</p>
+    <div class="form-group">
+        <label for="explanation">Комментарий</label>
+        <input class="form-control" id="comment" name="comment" disabled>
     </div>
     <div class="form-group">
         <label for="explanation">Разбивка:</label>
@@ -47,7 +49,8 @@
         <input type="number" class="form-control" id="total" name="total" disabled>
     </div>
     <div class="row">
-        <p>Доставка в другие регионы, кроме МСК осуществляется CDEK и оплачивается наложенным платежом. Оплата услуг курьера производится перед отсылкой лекарства к вам</p>
+        <p>Доставка в другие регионы, кроме МСК осуществляется CDEK и оплачивается наложенным платежом. Оплата услуг
+            курьера производится перед отсылкой лекарства к вам</p>
     </div>
 
 </div>
@@ -66,25 +69,27 @@
         let courierPriceBracket;
         if (amount <= 100) {
             courierPriceBracket = 15
-        } else if(amount <= 300) {
+        } else if (amount <= 300) {
             courierPriceBracket = 20
         } else (
             courierPriceBracket = 25
         )
-        var drugPrice = amount * price * trExchangeAdjusted;
-        let courier = amount * exchangeUS * courierPriceBracket;
+        const drugPrice = (amount * price * trExchangeAdjusted);
+        let courier = (amount * exchangeUS * courierPriceBracket);
         let serviceFee;
         if (drugPrice >= 20000) {
-            serviceFee = drugPrice / 10
+            serviceFee = (drugPrice / 10)
         } else {
             serviceFee = 2000
         }
-        var istanbulDeliveryFee = 100 * trExchangeAdjusted
+        const istanbulDeliveryFee = (100 * trExchangeAdjusted);
         document.getElementById("total").value = (drugPrice + courier + serviceFee + istanbulDeliveryFee).toFixed(2);
-        document.getElementById("explanation").value = ("Стоимость лекарств = " + drugPrice + "\n Курьер = " + courier)
+        document.getElementById("explanation").value = ("Стоимость лекарств = " + drugPrice + " Курьер = " + courier);
+        document.getElementById("comment").value = "В стоимость сразу же включена моя услуга и доставка лекарств курьерской службой до Стамбула " + serviceFee + " р и " + istanbulDeliveryFee + " р";
     }
+
     function getExchangeRate() {
-        return fetch("https://open.er-api.com/v6/latest/TRY", {mode:'no-cors'})
+        return fetch("https://open.er-api.com/v6/latest/TRY", {mode: 'no-cors'})
             .then(response => response.json())
             .catch(error => console.log("Error: " + error));
 
