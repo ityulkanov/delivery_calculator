@@ -62,6 +62,7 @@
         const price = document.getElementById("price").value;
         const trExchange = document.getElementById("exchange").value;
         const exchangeUS = document.getElementById("exchange-us").value;
+        const trExchangeAdjusted = trExchange * 1.1
         let courierPriceBracket;
         if (amount <= 100) {
             courierPriceBracket = 15
@@ -70,10 +71,16 @@
         } else (
             courierPriceBracket = 25
         )
-        let drugPrice = amount * price * (trExchange * 1.1);
+        var drugPrice = amount * price * trExchangeAdjusted;
         let courier = amount * exchangeUS * courierPriceBracket;
-
-        document.getElementById("total").value = (drugPrice + courier + 2350.0).toFixed(2);
+        let serviceFee;
+        if (drugPrice >= 20000) {
+            serviceFee = drugPrice / 10
+        } else {
+            serviceFee = 2000
+        }
+        var istanbulDeliveryFee = 100 * trExchangeAdjusted
+        document.getElementById("total").value = (drugPrice + courier + serviceFee + istanbulDeliveryFee).toFixed(2);
         document.getElementById("explanation").value = ("Стоимость лекарств = " + drugPrice + "\n Курьер = " + courier)
     }
     function getExchangeRate() {
