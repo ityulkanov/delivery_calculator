@@ -52,6 +52,10 @@
         <label for="total">Общая стоимость:</label>
         <input type="number" class="form-control" id="total" name="total" disabled>
     </div>
+    <div class="form-group">
+        <label for="payable">К оплате сейчас:</label>
+        <input type="number" class="form-control" id="payable" name="payable" disabled>
+    </div>
     <div class="row">
         <p>Доставка в другие регионы, кроме МСК осуществляется CDEK и оплачивается наложенным платежом. Оплата услуг
             курьера производится перед отсылкой лекарства к вам</p>
@@ -90,6 +94,8 @@
         document.getElementById("total").value = (drugPrice + courier + serviceFee + istanbulDeliveryFee).toFixed(2);
         document.getElementById("explanation").value = ("Стоимость лекарств = " + drugPrice.toFixed(2) + " Курьер = " + courier.toFixed(2));
         document.getElementById("comment").value = "В стоимость сразу же включена моя услуга и доставка лекарств курьерской службой до Стамбула " + serviceFee.toFixed(2) + " руб. и " + istanbulDeliveryFee.toFixed(2) + " руб.";
+        let payable = serviceFee + istanbulDeliveryFee + drugPrice;
+        document.getElementById("payable").value = "Оплатить сейчас (услуга, лекарства, доставка до Стамбула) " + payable.toFixed(2);
     }
 
     function clr() {
