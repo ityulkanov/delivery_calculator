@@ -41,7 +41,7 @@
 
     <br>
     <div class="form-group">
-        <label for="explanation">Комментарий</label>
+        <label for="comment">В общую стоимость включена моя услуга и доставка курьерской службой до Стамбула</label>
         <input class="form-control" id="comment" name="comment" disabled>
     </div>
     <div class="form-group">
@@ -98,7 +98,7 @@
         let totals = drugPrice + courier + serviceFee + istanbulDeliveryFee;
         document.getElementById("total").value = totals.toFixed(2);
         document.getElementById("explanation").value = ("Стоимость лекарств = " + drugPrice.toFixed(2) + " Курьер = " + courier.toFixed(2));
-        document.getElementById("comment").value = "В стоимость сразу же включена моя услуга и доставка лекарств курьерской службой до Стамбула " + serviceFee.toFixed(2) + " руб. и " + istanbulDeliveryFee.toFixed(2) + " руб.";
+        document.getElementById("comment").value = serviceFee.toFixed(2) + " руб. и " + istanbulDeliveryFee.toFixed(2) + " руб.";
         let payable = serviceFee + istanbulDeliveryFee + drugPrice;
         document.getElementById("payable").value = payable.toFixed(2);
         document.getElementById("perbox").value = totals / amount;
