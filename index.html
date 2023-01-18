@@ -100,8 +100,8 @@
         document.getElementById("explanation").value = ("Стоимость лекарств = " + drugPrice.toFixed(2) + " Курьер = " + courier.toFixed(2));
         document.getElementById("comment").value = "В стоимость сразу же включена моя услуга и доставка лекарств курьерской службой до Стамбула " + serviceFee.toFixed(2) + " руб. и " + istanbulDeliveryFee.toFixed(2) + " руб.";
         let payable = serviceFee + istanbulDeliveryFee + drugPrice;
-        document.getElementById("payable").value = "Оплатить сейчас (услуга, лекарства, доставка до Стамбула) " + payable.toFixed(2);
-        document.getElementById("perbox").value = totals / drugPrice;
+        document.getElementById("payable").value = payable.toFixed(2);
+        document.getElementById("perbox").value = totals / amount;
     }
 
     function clr() {
