@@ -97,7 +97,7 @@
         const istanbulDeliveryFee = (100 * trExchangeAdjusted);
         let totals = drugPrice + courier + serviceFee + istanbulDeliveryFee;
         document.getElementById("total").value = totals.toFixed(2);
-        document.getElementById("explanation").value = ("Стоимость лекарств = " + drugPrice.toFixed(2) + " Курьер = " + courier.toFixed(2));
+        document.getElementById("explanation").value = ("Стоимость лекарств: " + drugPrice.toFixed(2) + " Курьер: " + courier.toFixed(2));
         document.getElementById("comment").value = serviceFee.toFixed(2) + " руб. и " + istanbulDeliveryFee.toFixed(2) + " руб.";
         let payable = serviceFee + istanbulDeliveryFee + drugPrice;
         document.getElementById("payable").value = payable.toFixed(2);
