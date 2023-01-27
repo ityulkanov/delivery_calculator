@@ -72,15 +72,15 @@
 
 <script>
     function calculate() {
-        const amount = document.getElementById("amount").value;
-        const price = document.getElementById("price").value;
-        const trExchange = document.getElementById("exchange").value;
-        const exchangeUS = document.getElementById("exchange-us").value;
+        const amount = parseInt(document.getElementById("amount").value);
+        const price = parseFloat(document.getElementById("price").value);
+        const trExchange = parseFloat(document.getElementById("exchange").value);
+        const exchangeUS = parseFloat(document.getElementById("exchange-us").value);
         const trExchangeAdjusted = trExchange * 1.1
         let courierPriceBracket;
-        if (amount <= 100) {
+        if (price <= 300) {
             courierPriceBracket = 15
-        } else if (amount <= 300) {
+        } else if (price <= 1000.00) {
             courierPriceBracket = 20
         } else (
             courierPriceBracket = 25
@@ -100,7 +100,7 @@
         document.getElementById("comment").value = serviceFee.toFixed(2) + " руб. и " + istanbulDeliveryFee.toFixed(2) + " руб.";
         let payable = serviceFee + istanbulDeliveryFee + drugPrice;
         document.getElementById("payable").value = payable.toFixed(2);
-        document.getElementById("perbox").value = totals / amount;
+        document.getElementById("perbox").value = (totals / amount).toFixed(2);
     }
 
     function clr() {
